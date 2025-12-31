@@ -9,14 +9,20 @@
     "target": "es2022",
     "outDir": "./dist",
     "rootDir": "./src",
+    "baseUrl": ".",
 
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "node16",
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
 
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

@@ -7,6 +7,7 @@ import {
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
 import { env } from '@/shared/config/env'
+import { initializeDatabase } from '@/shared/infra/drizzle/db'
 import { setupMiddlewares } from '@/shared/infra/http/middleware'
 import { setupRoutes } from '@/shared/infra/http/routes'
 import { setupDocs, setupScalarDocs } from '@/shared/infra/http/swagger-scalar'
@@ -22,16 +23,20 @@ const app = fastify({
 }).withTypeProvider<ZodTypeProvider>()
 
 async function start() {
-  await setupMiddlewares(app)
-
-  app.setValidatorCompiler(validatorCompiler)
-  app.setSerializerCompiler(serializerCompiler)
-
-  await setupDocs(app)
-  await setupRoutes(app)
-  await setupScalarDocs(app)
-
   try {
+    // Inicializa conexão com o banco de dados
+    app.log.info('Inicializando conexão com o banco de dados...')
+    await initializeDatabase()
+
+    await setupMiddlewares(app)
+
+    app.setValidatorCompiler(validatorCompiler)
+    app.setSerializerCompiler(serializerCompiler)
+
+    await setupDocs(app)
+    await setupRoutes(app)
+    await setupScalarDocs(app)
+
     await app.listen({ port: env.PORT, host: '0.0.0.0' })
     app.log.info(`API documentation: http://localhost:${env.PORT}/reference`)
   } catch (err) {
