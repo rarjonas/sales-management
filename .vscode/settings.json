@@ -1,0 +1,16 @@
+{
+  // Formata ao salvar
+  "editor.formatOnSave": true,
+
+  // Biome como formatador padrão
+  "editor.defaultFormatter": "biomejs.biome",
+
+  // Corrige problemas de lint e organiza imports ao salvar
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit",
+    "source.fixAll.biome": "explicit"
+  },
+
+  // Configurações específicas do Biome
+  "biome.enabled": true
+}
