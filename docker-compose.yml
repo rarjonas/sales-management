@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: sales-management-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: sales-management
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=pt_BR.UTF-8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d sales-management"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sales-management-network
+
+volumes:
+  postgres_data:
+    driver: local
+    name: sales-management-postgres-data
+
+networks:
+  sales-management-network:
+    driver: bridge
