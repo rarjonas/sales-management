@@ -49,3 +49,15 @@ export class DatabaseNotFoundException extends DatabaseException {
     Object.setPrototypeOf(this, DatabaseNotFoundException.prototype)
   }
 }
+
+export class ValidationBusinessException extends Error {
+  constructor(
+    message: string,
+    public readonly code?: string,
+    public readonly originalError?: unknown,
+  ) {
+    super(message)
+    this.name = 'ValidationBusinessException'
+    Object.setPrototypeOf(this, ValidationBusinessException.prototype)
+  }
+}

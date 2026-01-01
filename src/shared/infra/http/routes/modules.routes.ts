@@ -1,4 +1,6 @@
 import type { FastifyInstance } from 'fastify'
+
+import CategoryModule from '@/modules/category/category.module'
 import HealthModule from '@/modules/health/health.module'
 
 /**
@@ -7,4 +9,5 @@ import HealthModule from '@/modules/health/health.module'
  */
 export async function setupModulesRoutes(app: FastifyInstance) {
   await app.register(HealthModule)
+  await app.register(CategoryModule)
 }

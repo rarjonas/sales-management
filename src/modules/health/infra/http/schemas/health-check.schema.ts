@@ -14,7 +14,7 @@ export const healthCheckResponseSchema = z.object({
  */
 export const healthCheckRouteSchema = {
   summary: 'Health check',
-  description: 'Verifica o status da API',
+  description: 'Check the health of the API',
   tags: ['Health'],
   response: {
     200: healthCheckResponseSchema,
