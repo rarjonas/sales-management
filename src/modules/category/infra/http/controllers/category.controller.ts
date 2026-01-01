@@ -1,12 +1,12 @@
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
+import type { z } from 'zod'
 import type { CategoryGetByIdUseCase } from '../../../core/use-cases/category-get-by-id.use-case'
 import type { CategoryListAllUseCase } from '../../../core/use-cases/category-list-all.use-case'
 import type { CategoryListAllResponseDto, CategoryResponseDto } from '../dto'
-import {
+import type {
   categoryGetByIdParamsSchema,
   categoryListAllQuerystringSchema,
 } from '../schemas/category.schema'
-import type { z } from 'zod'
 
 type ListAllCategoriesQuerystring = z.infer<
   typeof categoryListAllQuerystringSchema
